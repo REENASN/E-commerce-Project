@@ -1,0 +1,30 @@
+<suite name="crossbrowser" thread-count="5" parallel="tests">
+<listeners>
+		<listener class-name="com.sevenrmartsupermarket.listeners.ExtentReporter"></listener>
+	</listeners>
+	<test name="runningchrome">
+		<parameter name="browser" value="chrome"></parameter>
+		<classes>
+			<class name="com.sevenrmartsupermarket.tests.LoginTest" />
+
+		</classes>
+	</test>
+
+	<test name="runningEdge">
+<parameter name="browser" value="edge"></parameter>
+		<classes>
+			<class name="com.sevenrmartsupermarket.tests.LoginTest" />
+
+		</classes>
+	</test>
+
+
+	<test name="runningfirefox">
+	<parameter name="browser" value="firefox"></parameter>
+		<classes>
+			<class name="com.sevenrmartsupermarket.tests.LoginTest" />
+
+		</classes>
+	</test>
+
+</suite>

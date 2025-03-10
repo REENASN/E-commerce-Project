@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite name="allmodulerun" thread-count="5" parallel="tests">
+	<test name="login">
+		<classes>
+			<class name="com.sevenrmartsupermarket.tests.LoginTest" />
+
+		</classes>
+	</test>
+
+	<test name="homepage">
+		<classes>
+			<class name="com.sevenrmartsupermarket.tests.HomeTest" />
+		</classes>
+	</test>
+
+
+	<test name="Adminusers">
+		<classes>
+			<class name="com.sevenrmartsupermarket.tests.AdminUsersTest" />
+		</classes>
+	</test>
+
+</suite>
