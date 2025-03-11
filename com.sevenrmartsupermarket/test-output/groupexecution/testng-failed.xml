@@ -18,13 +18,6 @@
           <include name="launchSession"/>
         </methods>
       </class> <!-- com.sevenrmartsupermarket.tests.CategoryTest -->
-      <class name="com.sevenrmartsupermarket.tests.LoginTest">
-        <methods>
-          <include name="launchSession"/>
-          <include name="launchSession"/>
-          <include name="verifyLogin"/>
-        </methods>
-      </class> <!-- com.sevenrmartsupermarket.tests.LoginTest -->
     </classes>
   </test> <!-- regressionrun(failed) -->
 </suite> <!-- Failed suite [groupexecution] -->

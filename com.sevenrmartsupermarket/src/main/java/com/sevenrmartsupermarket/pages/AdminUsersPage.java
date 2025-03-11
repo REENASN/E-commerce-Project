@@ -6,16 +6,17 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.Select;
 
 import com.sevenrmartsupermarket.utilities.GeneralUtility;
 import com.sevenrmartsupermarket.utilities.PageUtility;
+import com.sevenrmartsupermarket.utilities.WaitUtility;
 
 public class AdminUsersPage 
 {
 	WebDriver driver;
 	PageUtility pageutility=new PageUtility(driver);
 	GeneralUtility generaluser=new GeneralUtility();
+	WaitUtility waitutility=new WaitUtility(driver);
 	
 	@FindBy(xpath = "//a[@class='btn btn-rounded btn-danger']")
 	private WebElement btn_New;
@@ -169,6 +170,7 @@ public class AdminUsersPage
 	
 	public void clickOnDownwardArrow()
 	{
+		//waitutility.waitForClickable(btn_Password_showDetails,30);
 		btn_Password_showDetails.click();
 	}
 	
@@ -217,7 +219,8 @@ public class AdminUsersPage
 	}
 	
 	public String userStatusChange()
-	{
+	{ 
+		waitutility.waitForClickable(btn_Change_Status,30);
 		pageutility.doubleClick(driver,btn_Change_Status);
 		return alert_Change_Status.getText();
 	}

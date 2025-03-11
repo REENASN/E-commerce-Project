@@ -50,16 +50,18 @@ public class LoginPage {
 		signIn_Button.click();
 	}
 
-	public void logIn(String userName, String password) {
+	public  HomePage logIn(String userName, String password) {
 		enterUserName(userName);
 		enterPassword(password);
 		clickOnSignInButton();
+		return new HomePage(driver);
 	}
 
-	public void logIn() {
+	public HomePage logIn() {
 		String userName = properties.getProperty("username");
 		String password = properties.getProperty("password");
 		logIn(userName, password);
+		return new HomePage(driver);
 	}
 	
 	public String alertMessageForInvalidCredentials()

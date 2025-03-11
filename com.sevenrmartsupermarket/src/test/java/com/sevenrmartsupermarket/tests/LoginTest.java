@@ -8,7 +8,6 @@ import com.sevenrmartsupermarket.pages.HomePage;
 import com.sevenrmartsupermarket.pages.LoginPage;
 import com.sevenrmartsupermarket.utilities.ExcelReader;
 
-
 public class LoginTest extends Base {
 
 	LoginPage loginpage;
@@ -19,8 +18,8 @@ public class LoginTest extends Base {
 	{
 		loginpage=new LoginPage(driver);
 		homepage=new HomePage(driver);
-		loginpage.logIn("REENASN","REENASN123");
-		String expectedProfileName="REENASN";
+		loginpage.logIn("Adrianne Heller","lrez4l");
+		String expectedProfileName="Adrianne Heller";
 		String actualProfileName=homepage.getProfileName();
 		Assert.assertEquals(actualProfileName, expectedProfileName);
 		
@@ -32,13 +31,13 @@ public class LoginTest extends Base {
 		excelreader.setExcelFile("LoginData","InvalidCredentials");
 		String userName=excelreader.getCellData(2, 0);
 		String passWord=excelreader.getCellData(2, 1);
-		System.out.println(userName+passWord);
+		System.out.println("Invalid UserName::"+userName+"Invalid Password::"+passWord);
 		loginpage=new LoginPage(driver);
 		loginpage.logIn(userName,passWord);
 		//loginpage.logIn("REENA","REENASN12");
 		String expectedAlertMessage="Alert!";
 		String actualAlertMessage=loginpage.alertMessageForInvalidCredentials();
-		System.out.println("ActualAlertMessage"+actualAlertMessage);
+		System.out.println("ActualAlertMessage::"+actualAlertMessage);
 		Assert.assertEquals(expectedAlertMessage, actualAlertMessage);
 		
 	}

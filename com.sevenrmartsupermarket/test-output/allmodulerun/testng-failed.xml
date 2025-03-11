@@ -6,21 +6,11 @@
       <class name="com.sevenrmartsupermarket.tests.HomeTest">
         <methods>
           <include name="launchSession"/>
+          <include name="launchSession"/>
           <include name="adminUsers"/>
           <include name="terminateSession"/>
         </methods>
       </class> <!-- com.sevenrmartsupermarket.tests.HomeTest -->
     </classes>
   </test> <!-- homepage(failed) -->
-  <test thread-count="5" parallel="tests" name="login(failed)">
-    <classes>
-      <class name="com.sevenrmartsupermarket.tests.LoginTest">
-        <methods>
-          <include name="launchSession"/>
-          <include name="verifyLogin"/>
-          <include name="terminateSession"/>
-        </methods>
-      </class> <!-- com.sevenrmartsupermarket.tests.LoginTest -->
-    </classes>
-  </test> <!-- login(failed) -->
 </suite> <!-- Failed suite [allmodulerun] -->

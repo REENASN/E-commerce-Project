@@ -16,7 +16,7 @@ public class HomeTest extends Base{
 	{
 		loginpage=new LoginPage(driver);
 	    homepage=new HomePage(driver);
-	    loginpage.logIn("REENASN","REENASN123");
+	    loginpage.logIn("Adrianne Heller","lrez4l");
 	    homepage.clickOnAdminUsers();
 	}
 }

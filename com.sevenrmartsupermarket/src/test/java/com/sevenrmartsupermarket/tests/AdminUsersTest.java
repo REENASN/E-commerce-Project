@@ -8,17 +8,19 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import com.sevenrmartsupermarket.base.Base;
 import com.sevenrmartsupermarket.dataProviders.AdminUserDataProvider;
+import com.sevenrmartsupermarket.listeners.RetryAnalyzer;
 import com.sevenrmartsupermarket.pages.AdminUsersPage;
 import com.sevenrmartsupermarket.pages.HomePage;
 import com.sevenrmartsupermarket.pages.LoginPage;
 import com.sevenrmartsupermarket.utilities.ScreenShotCapture;
+import com.sevenrmartsupermarket.utilities.WaitUtility;
 import com.sevenrmartsupermarket.dataProviders.AdminUserDataProvider;
 
 public class AdminUsersTest extends Base {
 	HomePage homepage;
 	LoginPage loginpage;
 	AdminUsersPage adminuserpage;
-	
+	WaitUtility waitutility;
 	
 	@Test(priority=-1)
 	public void verify_Buttons_AdminUsersPage()
@@ -115,9 +117,9 @@ public class AdminUsersTest extends Base {
 	public void verify_SearchButtonFunctionalityForValidUser()
 	{
 		loginpage=new LoginPage(driver);
-		loginpage.logIn();
+	
+		homepage=loginpage.logIn();
 		
-	    homepage=new HomePage(driver);
 	    homepage.clickOnAdminUsers();
 	    
 	    adminuserpage=new AdminUsersPage(driver);
@@ -175,13 +177,12 @@ public class AdminUsersTest extends Base {
 	    System.out.println("Username not found,Delete function Successfull");
 	}
 	
-	@Test(priority=5)
+	@Test(priority=5,retryAnalyzer = RetryAnalyzer.class)
 	public void verify_UserStatusChangeButtonFunctionality()
 	{
 		loginpage=new LoginPage(driver);
-		 loginpage.logIn();
-		 
-	    homepage=new HomePage(driver);
+		
+		homepage=loginpage.logIn();
 	    homepage.clickOnAdminUsers();
 	    
 	    adminuserpage=new AdminUsersPage(driver);
@@ -228,7 +229,7 @@ public class AdminUsersTest extends Base {
 	    
 	    adminuserpage=new AdminUsersPage(driver);
 	    adminuserpage.clickOnSearchButton();
-	    adminuserpage.searchForValidUser("gayu","admin");
+	    adminuserpage.searchForValidUser("SAARA DAVIS","admin");
 	    adminuserpage.editAUserDetails();
 	    
 	   // Assert.assertTrue(true);
