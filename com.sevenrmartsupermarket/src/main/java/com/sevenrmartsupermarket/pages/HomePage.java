@@ -10,23 +10,23 @@ public class HomePage {
 	WebDriver driver;
 	
 	@FindBy(xpath = "//div[@class='user-panel mt-3 pb-3 mb-3 d-flex']//a")
-	private WebElement profileName_Element;
+	private WebElement profileName;
 	@FindBy(xpath = "//div[@class='small-box bg-info']//p[text()='Admin Users']//following::a[1]")
-	private WebElement adminUsers_Element;
+	private WebElement adminUsers;
 	@FindBy(xpath = "//div[@class='small-box bg-info']//p[text()='Category']//following::a[1]")
-	private WebElement category_Element;
+	private WebElement category;
 	@FindBy(xpath = "//div[@class='small-box bg-info']//p[text()='Sub Category']//following::a[1]")
-	private WebElement subCategory_Element;
+	private WebElement subCategory;
 	@FindBy(xpath = "//div[@class='small-box bg-info']//p[text()='Manage Contact']//following::a[1]")
-	private WebElement manageContact_Element;
+	private WebElement manageContact;
 	@FindBy(xpath = "//div[@class='small-box bg-info']//p[text()='Manage Product']//following::a[1]")
-	private WebElement manageProduct_Element;
+	private WebElement manageProduct;
 	@FindBy(xpath = "//div[@class='small-box bg-info']//p[text()='Manage News']//following::a[1]")
-	private WebElement manageNews_Element;
+	private WebElement manageNews;
 	@FindBy(xpath = "//div[@class='small-box bg-info']//p[text()='Manage Footer Text']//following::a[1]")
-	private WebElement manageFooterText_Element;
+	private WebElement manageFooterText;
 	@FindBy(xpath = "//div[@class='small-box bg-info']//p[text()='Manage Category']//following::a[1]")
-	private WebElement manageCategory_Element;
+	private WebElement manageCategory;
 	
 	public HomePage(WebDriver driver) {
 		this.driver = driver;
@@ -35,18 +35,25 @@ public class HomePage {
 	
 	public String getProfileName()
 	{
-		return profileName_Element.getText();
+		return profileName.getText();
 	}
 	
 	public void clickOnAdminUsers()
 	{
-		adminUsers_Element.click();
+		adminUsers.click();
 	}
 	
 	public void clickOnCategory()
 	{
-		category_Element.click();
+		category.click();
 	}
 	
-	
+	public void clickOnSubCategory()
+	{
+		subCategory.click();
+	}
+	public void clickOnManageContact()
+	{
+		manageContact.click();
+	}
 }

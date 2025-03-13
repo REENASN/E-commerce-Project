@@ -1,6 +1,8 @@
 package com.sevenrmartsupermarket.utilities;
 
 import java.time.Duration;
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -22,9 +24,16 @@ public class WaitUtility {
 		 wait.until(ExpectedConditions.elementToBeClickable(element));
 	}
 	
-	public void waitForVisibility(String xpath,long time)
+	public void waitForVisibility(WebElement element,long time)
 	{
 		wait=new WebDriverWait(driver,Duration.ofSeconds(time));
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("element")));
 	}
+	
+	public void waitForElementLocated(WebElement element,long time)
+	{
+		wait=new WebDriverWait(driver,Duration.ofSeconds(time));
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("element")));
+	}
+	
 }

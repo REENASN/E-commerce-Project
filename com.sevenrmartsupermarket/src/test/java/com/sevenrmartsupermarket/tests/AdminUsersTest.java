@@ -6,6 +6,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
+
 import com.sevenrmartsupermarket.base.Base;
 import com.sevenrmartsupermarket.dataProviders.AdminUserDataProvider;
 import com.sevenrmartsupermarket.listeners.RetryAnalyzer;
@@ -21,6 +23,7 @@ public class AdminUsersTest extends Base {
 	LoginPage loginpage;
 	AdminUsersPage adminuserpage;
 	WaitUtility waitutility;
+	SoftAssert softassert=new SoftAssert();
 	
 	@Test(priority=-1)
 	public void verify_Buttons_AdminUsersPage()
@@ -43,30 +46,6 @@ public class AdminUsersTest extends Base {
 	    Assert.assertTrue(ResetButtonStatus);
 	}
 	
-	/*@Test(priority=1)
-	public void verify_AddNewUser()
-	{
-		loginpage=new LoginPage(driver);
-	    homepage=new HomePage(driver);
-	    adminuserpage=new AdminUsersPage(driver);
-	    loginpage.logIn();
-	    homepage.clickOnAdminUsers();
-	    adminuserpage.clickOnNewButton();
-	    adminuserpage.addNewUser("SAARA DAVIS","SA123","Admin");
-	    String actual_SuccessText=adminuserpage.getSaveButtonText();
-	    String expected_SuccessText="Alert!";
-	    Assert.assertEquals(actual_SuccessText, expected_SuccessText);  
-	    
-	    adminuserpage.clickOnSearchButton();
-	    List<WebElement> Tabledatas=adminuserpage.searchForValidUser("SAARA DAVIS","Admin");
-		System.out.println("Table Datas::");
-		for(WebElement x:Tabledatas)
-		{
-			System.out.println(x.getText());
-		}
-		System.out.println("New User Added Successfully");
-	}*/
-	
 	@Test(dataProvider ="userdatas",dataProviderClass =AdminUserDataProvider.class)
 	public void verify_AddNewUser(String userName,String password,String userType)
 	{
@@ -82,16 +61,10 @@ public class AdminUsersTest extends Base {
 	    
 	    String actual_SuccessText=adminuserpage.getSaveButtonText();
 	    String expected_SuccessText="Alert!";
-	    Assert.assertEquals(actual_SuccessText, expected_SuccessText);  
+	    softassert.assertEquals(actual_SuccessText,expected_SuccessText);
 	    
 	    adminuserpage.clickOnSearchButton();
-	    List<WebElement> Tabledatas=adminuserpage.searchForValidUser("SAARA DAVIS","Admin");
-		System.out.println("Table Datas::");
-		for(WebElement x:Tabledatas)
-		{
-			System.out.println(x.getText());
-		}
-		System.out.println("New User Added Successfully");
+	    adminuserpage.searchForValidUser(userName,userType);
 	}
 	
 	@Test(priority=2)
@@ -125,16 +98,11 @@ public class AdminUsersTest extends Base {
 	    adminuserpage=new AdminUsersPage(driver);
 	    adminuserpage.clickOnSearchButton();
 	    
-	    List<WebElement> Tabledatas=adminuserpage.searchForValidUser("SAARA DAVIS","Admin");
-		System.out.println("Table Datas::");
-		for(WebElement x:Tabledatas)
-		{
-			System.out.println(x.getText());
-		}
+	    adminuserpage.searchForValidUser("SAARA DAVIS","Admin");
 	}
 	
 	@Test(priority=4)
-	public void verify_verify_SearchButtonFunctionalityForInValidUser()
+	public void verify_SearchButtonFunctionalityForInValidUser()
 	{
 		loginpage=new LoginPage(driver);
 		loginpage.logIn();
@@ -165,7 +133,7 @@ public class AdminUsersTest extends Base {
 	    adminuserpage.searchForValidUser("SAARA DAVIS","Admin");
 	    
 	    String firstRowUserName=adminuserpage.getFirstRowData();
-	    String actualData=adminuserpage.deleteButton(); 
+	   String actualData= adminuserpage.deleteButton(); 
 	    String expectedData="Do you want to delete this User?";
 	    Assert.assertEquals(actualData, expectedData);
 	    

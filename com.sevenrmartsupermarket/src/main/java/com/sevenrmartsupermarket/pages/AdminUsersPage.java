@@ -152,10 +152,15 @@ public class AdminUsersPage
 		input_Search_Usertype.sendKeys(userType);
 	}
 	
-	public List<WebElement> clickOnSearchButtonForSearchFunction()
+	public void clickOnSearchButtonForSearchFunction()
 	{
 		btn_Search_Search.click();
-		return table_Data_Searched;		
+		System.out.println("Table Datas::");
+		for(WebElement datas:table_Data_Searched)
+		{
+			System.out.println(datas.getText());
+		}
+		System.out.println("New User Added Successfully");	
 	}
 	
 	public String getFirstRowData()
@@ -197,12 +202,11 @@ public class AdminUsersPage
 		clickOnSaveButton();
 	}
 	
-	public List<WebElement> searchForValidUser(String userName,String userType)
+	public void searchForValidUser(String userName,String userType)
 	{
 		enterUserNameForSearchFunction(userName);
 		enterUserTypeForSearchFunction(userType);
-		 List<WebElement> Tabledatas=clickOnSearchButtonForSearchFunction();	
-		 return Tabledatas;
+		clickOnSearchButtonForSearchFunction();		
 	}
 	
 	public String searchOption_InvalidData(String userName,String userType)
@@ -215,13 +219,16 @@ public class AdminUsersPage
 	
 	public String deleteButton()
 	{
+		// pageutility.switchToAlert(driver, btn_DeleteForFirstRow);
 		return pageutility.switchToAlertAndGetText(driver,btn_DeleteForFirstRow);
 	}
 	
 	public String userStatusChange()
 	{ 
+		waitutility=new WaitUtility(driver);
 		waitutility.waitForClickable(btn_Change_Status,30);
-		pageutility.doubleClick(driver,btn_Change_Status);
+		pageutility.mouseClick(driver, btn_Change_Status);
+		//pageutility.doubleClick(driver,btn_Change_Status);
 		return alert_Change_Status.getText();
 	}
 	

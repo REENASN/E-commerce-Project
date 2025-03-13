@@ -11,12 +11,12 @@ public class HomeTest extends Base{
 	HomePage homepage;
 	LoginPage loginpage;
 	
-	@Test
+	@Test(description="Verify that admin is able to navigate to Admin Users page")
 	public void adminUsers()
 	{
 		loginpage=new LoginPage(driver);
 	    homepage=new HomePage(driver);
-	    loginpage.logIn("Adrianne Heller","lrez4l");
+	    loginpage.logIn("admin","admin");
 	    homepage.clickOnAdminUsers();
 	}
 }

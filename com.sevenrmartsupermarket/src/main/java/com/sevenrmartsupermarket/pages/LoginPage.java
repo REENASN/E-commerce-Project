@@ -24,8 +24,7 @@ public class LoginPage {
 	private WebElement signIn_Button;
 	@FindBy(xpath = "//div[@class='alert alert-danger alert-dismissible']//h5[contains(text(),'Alert!')]")
 	private WebElement invalidAlert_Message;
-	//@FindBy(xpath = "//div[contains(@class, 'alert-danger') and contains(., 'Invalid Username')]")
-	// private WebElement invalidAlert_Message;
+	
 
 	public LoginPage(WebDriver driver) {
 		this.driver = driver;
@@ -64,8 +63,8 @@ public class LoginPage {
 		return new HomePage(driver);
 	}
 	
-	public String alertMessageForInvalidCredentials()
+	public boolean alertMessageForInvalidCredentials()
 	{
-		return invalidAlert_Message.getText();
+	   return invalidAlert_Message.isDisplayed();
 	}
 }

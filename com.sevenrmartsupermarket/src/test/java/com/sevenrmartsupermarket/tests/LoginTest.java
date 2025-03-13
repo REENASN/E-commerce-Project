@@ -1,5 +1,7 @@
 package com.sevenrmartsupermarket.tests;
 
+import static org.testng.Assert.assertTrue;
+
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -13,13 +15,14 @@ public class LoginTest extends Base {
 	LoginPage loginpage;
 	HomePage homepage;
 	ExcelReader excelreader=new ExcelReader();
-	@Test(groups="regression")
+	
+	@Test(groups="regression",description="Verify the profile name")
 	public void verifyLogin()
 	{
 		loginpage=new LoginPage(driver);
 		homepage=new HomePage(driver);
-		loginpage.logIn("Adrianne Heller","lrez4l");
-		String expectedProfileName="Adrianne Heller";
+		loginpage.logIn("admin","admin");
+		String expectedProfileName="Admin";
 		String actualProfileName=homepage.getProfileName();
 		Assert.assertEquals(actualProfileName, expectedProfileName);
 		
@@ -31,14 +34,12 @@ public class LoginTest extends Base {
 		excelreader.setExcelFile("LoginData","InvalidCredentials");
 		String userName=excelreader.getCellData(2, 0);
 		String passWord=excelreader.getCellData(2, 1);
-		System.out.println("Invalid UserName::"+userName+"Invalid Password::"+passWord);
+	
 		loginpage=new LoginPage(driver);
 		loginpage.logIn(userName,passWord);
-		//loginpage.logIn("REENA","REENASN12");
-		String expectedAlertMessage="Alert!";
-		String actualAlertMessage=loginpage.alertMessageForInvalidCredentials();
-		System.out.println("ActualAlertMessage::"+actualAlertMessage);
-		Assert.assertEquals(expectedAlertMessage, actualAlertMessage);
+		
+		boolean isRedAlertMessageDisplayed=loginpage.alertMessageForInvalidCredentials();
+		Assert.assertTrue(isRedAlertMessageDisplayed);
 		
 	}
 }

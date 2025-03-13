@@ -9,12 +9,14 @@ import org.openqa.selenium.support.PageFactory;
 
 import com.sevenrmartsupermarket.utilities.GeneralUtility;
 import com.sevenrmartsupermarket.utilities.PageUtility;
+import com.sevenrmartsupermarket.utilities.WaitUtility;
 
 public class CategoryPage {
 	
 	WebDriver driver;
 	PageUtility pageutility=new PageUtility(driver);
 	GeneralUtility generaluser=new GeneralUtility();
+	WaitUtility waitutility=new WaitUtility(driver);
 	
 	@FindBy(xpath="//a[@class='btn btn-rounded btn-danger']")
 	private WebElement btn_New;
@@ -54,8 +56,11 @@ public class CategoryPage {
 	@FindBy(xpath="//div[@class='card-body']//button[@type='submit']")
 	private WebElement button_Search_Submit;
 	
-	@FindBy(xpath="//table[@class='table table-bordered table-hover table-sm']//tbody")
+	@FindBy(xpath="//table[@class='table table-bordered table-hover table-sm']//tbody//tr")
 	private List<WebElement> table_Data_Searched;
+	
+	@FindBy(xpath="//table//tbody//tr//td[1]")
+	private WebElement searchedData;
 	
 	@FindBy(xpath="//div[@class='alert alert-danger alert-dismissible']//h5")
 	private WebElement alert_AlreadyExist;
@@ -94,9 +99,8 @@ public class CategoryPage {
 	}
 	public void chooseImageFile()
 	{
-		//String path="C:\\Users\\REENA\\eclipse-workspace\\com.sevenrmartsupermarket\\src\\main\\resources\\imageFiles\\BeautyProducts.jpg";
-		String path="C:\\Users\\REENA\\eclipse-workspace\\com.sevenrmartsupermarket\\src\\main\\resources\\imageFiles\\choclates.jpg";
-		choose_ImageFile.sendKeys(path);
+		pageutility=new PageUtility(driver);
+		pageutility.uploadImage(choose_ImageFile, "BeautyProducts");	
 	}
 	
 	public void select_RadioButton_ShowOnTopMenu()
@@ -111,6 +115,8 @@ public class CategoryPage {
 	
 	public void clickOnSaveButton()
 	{
+		waitutility=new WaitUtility(driver);
+		waitutility.waitForClickable(button_Save,30);
 		pageutility.mouseClick(driver,button_Save);
 	}
 	
@@ -121,10 +127,13 @@ public class CategoryPage {
 	
 	public String getDuplicationAlertMessage()
 	{
+		System.out.println("***This category already Exist***");
 		return alert_AlreadyExist.getText();
 	}
 	public void clickOnSearchButton()
 	{
+		waitutility=new WaitUtility(driver);
+		waitutility.waitForClickable(btn_Search,30);
 		btn_Search.click();
 	}
 	
@@ -133,18 +142,22 @@ public class CategoryPage {
 		input_Search_Category.sendKeys(categoryname);
 	}
 	
-	public List<WebElement> clickOnSubmitSearchButton()
+	public void clickOnSubmitSearchButton()
 	{
-		button_Search_Submit.click();
-		return table_Data_Searched;
+		pageutility.mouseClick(driver, button_Search_Submit);
 	}
 	
-	public void clickOnHomeNavigation()
+	public boolean SearchedCategoryAvailability()
+	{
+		return searchedData.isDisplayed(); 
+	}
+	
+	public void clickOnHomePage_Navigation()
 	{
 		navigate_back_Home.click();
 	}
 	
-	public void addCategoryInformations(String category)
+	public void addCategoryDetails(String category)
 	{
 		enterCategoryName(category);
 		selectGroups();
@@ -163,12 +176,10 @@ public class CategoryPage {
 		clickOnSaveButton();
 	}
 	
-	public List<WebElement> searchForCategories(String category)
+	public void searchCategories(String category)
 	{
 		enterSearchCategory(category);
-		//clickOnSubmitSearchButton();
-		List<WebElement> tableDatas=clickOnSubmitSearchButton();
-		return tableDatas;
+	    clickOnSubmitSearchButton();
 	}
 	
 	public String deleteCategory()
